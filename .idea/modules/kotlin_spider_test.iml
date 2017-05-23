@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="kotlin_spider:test" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="nbsaw" external.system.module.type="sourceSet" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="1">
+        <option name="compilerInfo">
+          <KotlinCompilerInfo>
+            <option name="compilerSettings">
+              <CompilerSettings />
+            </option>
+            <option name="k2jsCompilerArguments">
+              <K2JSCompilerArguments />
+            </option>
+            <option name="k2jvmCompilerArguments">
+              <K2JVMCompilerArguments>
+                <option name="noStdlib" value="true" />
+                <option name="noReflect" value="true" />
+                <option name="moduleName" value="kotlin_spider_main" />
+                <option name="jvmTarget" value="1.6" />
+                <option name="addCompilerBuiltIns" value="true" />
+                <option name="loadBuiltInsFromDependencies" value="true" />
+                <option name="languageVersion" value="1.1" />
+                <option name="apiVersion" value="1.1" />
+                <option name="coroutinesWarn" value="true" />
+              </K2JVMCompilerArguments>
+            </option>
+            <option name="_commonCompilerArguments">
+              <DummyImpl>
+                <option name="languageVersion" value="1.1" />
+                <option name="apiVersion" value="1.1" />
+                <option name="pluginClasspaths">
+                  <array />
+                </option>
+                <option name="coroutinesWarn" value="true" />
+                <option name="pluginOptions">
+                  <array />
+                </option>
+              </DummyImpl>
+            </option>
+          </KotlinCompilerInfo>
+        </option>
+        <option name="useProjectSettings" value="false" />
+        <option name="versionInfo">
+          <KotlinVersionInfo>
+            <option name="apiLevel" value="1.1" />
+            <option name="languageLevel" value="1.1" />
+            <option name="targetPlatformName" value="JVM 1.6" />
+          </KotlinVersionInfo>
+        </option>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output-test url="file://$MODULE_DIR$/../../build/classes/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../src/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../src/test/kotlin" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../src/test/resources" type="java-test-resource" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="kotlin_spider_main" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jre8:1.1.1" level="project" />
+    <orderEntry type="library" name="Gradle: us.codecraft:webmagic-core:0.6.1" level="project" />
+    <orderEntry type="library" name="Gradle: us.codecraft:webmagic-extension:0.6.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpclient:4.5.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.1" level="project" />
+    <orderEntry type="library" name="Gradle: us.codecraft:xsoup:0.3.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-log4j12:1.7.6" level="project" />
+    <orderEntry type="library" name="Gradle: commons-collections:commons-collections:3.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.jsoup:jsoup:1.8.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-io:1.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.jayway.jsonpath:json-path:0.8.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.alibaba:fastjson:1.2.21" level="project" />
+    <orderEntry type="library" name="Gradle: redis.clients:jedis:2.9.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.1.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpcore:4.4.4" level="project" />
+    <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.9" level="project" />
+    <orderEntry type="library" name="Gradle: org.assertj:assertj-core:1.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" name="Gradle: commons-io:commons-io:1.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: net.minidev:json-smart:1.1.1" level="project" />
+    <orderEntry type="library" name="Gradle: commons-lang:commons-lang:2.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-pool2:2.4.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
+  </component>
+  <component name="TestModuleProperties" production-module="kotlin_spider_main" />
+</module>
