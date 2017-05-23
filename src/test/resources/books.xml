@@ -1,4 +1,4 @@
-<inventory>
+<html>
     <book year="2000">
         <title>Snow Crash</title>
         <author>Neal Stephenson</author>
@@ -23,5 +23,4 @@
         <isbn>0553573862</isbn>
         <price>7.50</price>
     </book>
-
-</inventory>
+</html>
