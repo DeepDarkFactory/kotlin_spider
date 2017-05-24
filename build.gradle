@@ -24,4 +24,6 @@ dependencies {
     compile group: 'us.codecraft', name: 'webmagic-core', version: '0.6.1'
     // https://mvnrepository.com/artifact/us.codecraft/webmagic-extension
     compile group: 'us.codecraft', name: 'webmagic-extension', version: '0.6.1'
+    // https://mvnrepository.com/artifact/com.huaban/jieba-analysis
+    compile group: 'com.huaban', name: 'jieba-analysis', version: '1.0.2'
 }
