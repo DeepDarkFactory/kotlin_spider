@@ -9,8 +9,6 @@ import us.codecraft.webmagic.processor.PageProcessor
 import java.lang.System.currentTimeMillis
 import java.util.*
 import java.util.Map
-import kotlin.Comparator
-import kotlin.collections.HashMap
 
 
 /**
@@ -44,7 +42,6 @@ class lyricSpider : PageProcessor {
         var text = page.json.jsonPath("lrc.lyric").replace("\\[.+\\]","").replace("\\pP|\\pS", "").replace("作曲家","").replace("作曲","").replace("作词","")
         var sg = JiebaSegmenter()
         wordList.add(sg.sentenceProcess(text.toString()))
-//        println(sg.sentenceProcess(text.toString()))
     }
 
 
@@ -63,16 +60,20 @@ fun getLyric(){
 fun getRank(){
     wordList.forEach {
         it.forEach {w ->
-            if (word[w] != null)
-                word[w] = word[w]!! + 1
-            else if (!w.trim().isEmpty() && w.length > 1)
-                word[w] = 1
+            var key = w.trim().replace("\n","")
+            if (word[key] != null){
+                word[key] = word[key]!! + 1
+            }
+            else if (!key.trim().isEmpty() && key.length > 1)
+                word[key] = 1
         }
     }
-//     word.toSortedMap(compareBy<String> { word[it] }.thenByDescending { word[it] })
-//     word.entries.stream().sorted(Map.Entry.comparingByValue{o1,o2 -> o2.compareTo(o1)}).forEach(::println)
-        word.entries.stream().sorted(Map.Entry.comparingByValue()).forEach(::println)
-//     word.forEach { if (!it.key.trim().isEmpty()) println(it.key) }
+    // 如果你行看看输出的结果
+
+    // 正序输出结果
+//    word.entries.stream().sorted(Map.Entry.comparingByValue()).forEach(::println)
+    // 逆序输出结果
+//    word.entries.stream().sorted(Map.Entry.comparingByValue{o1,o2 -> o2.compareTo(o1)}).forEach(::println)
 }
 
 
@@ -82,8 +83,7 @@ fun main(args:Array<String>){
     var startTime :Long = currentTimeMillis()
     var endTime :Long
     System.out.println("开始爬取...")
-    val request = Request("http://music.163.com/artist?id=1038093")
-//    request.method = HttpConstant.Method.POST
+    val request = Request("http://music.163.com/artist?id=1049179")
     Spider.create(songsIdSpider()).addRequest(request).thread(5).run()
     endTime = currentTimeMillis()
     getLyric()
