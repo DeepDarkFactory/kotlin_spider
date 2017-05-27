@@ -1,9 +1,9 @@
 <p align="center"><a href="https://github.com/DeepDarkFactory" target="_blank"><img width="100"src="http://7xqvgr.com1.z0.glb.clouddn.com/logo.jpg"></a></p>
 
 <p align="center">
-  <a href="https://github.com/DeepDarkFactory"><img src="https://img.shields.io/badge/Made%20in-DDF-ff69b4.svg" /></a>
-  <a href="https://gradle.org/"><img src="https://img.shields.io/badge/gradle-3.5-brightgreen.svg" /></a>
-  <a href="https://gradle.org/"><img src="https://img.shields.io/badge/gradle-3.5-brightgreen.svg" /></a>
+  <a href="https://github.com/DeepDarkFactory"><img src="https://img.shields.io/badge/Made%20in-DDF-ff69b4.svg" alt="DDF" /></a>
+  <a href="http://kotlinlang.org/"><img src="https://img.shields.io/badge/Kotlin-1.1.2-brightgreen.svg" alt="Kotln" /></a>
+  <a href="https://gradle.org/"><img src="https://img.shields.io/badge/gradle-3.5-brightgreen.svg" alt="Gradle" /></a>
   <a href="https://github.com/Nbsaw/kotlin_spider/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/vue.svg" alt="License"></a>
 </p>
 
