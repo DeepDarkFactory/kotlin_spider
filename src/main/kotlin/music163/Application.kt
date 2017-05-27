@@ -8,7 +8,6 @@ import us.codecraft.webmagic.Spider
 import us.codecraft.webmagic.processor.PageProcessor
 import java.lang.System.currentTimeMillis
 import java.util.*
-import java.util.Map
 
 
 /**
