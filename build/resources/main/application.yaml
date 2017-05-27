@@ -1,0 +1,10 @@
+# 项目的名字
+project.name:  "kotlin_spider"
+
+# 服务器的一些配置
+server:
+       address: 0.0.0.0
+       port: 3000
+
+# 只是喜欢彩色的 ...
+spring.output.ansi.enabled: always

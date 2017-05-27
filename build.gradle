@@ -3,19 +3,39 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     ext.kotlin_version = '1.1.1'
-
+    ext.spring_boot_version = '1.5.3.RELEASE'
     repositories {
-        mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
     }
 }
 
+apply plugin: 'idea'
 apply plugin: 'kotlin'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'application'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    generateStubs = true
+}
+
+jar {
+    baseName = 'gs-rest-service'
+    version = version
+}
 
 repositories {
-    mavenCentral()
+    jcenter()
+}
+
+// WebMagic里面右slf4j,如果同时出现多个slf4j项目会无法运行
+// 所以加上了这个( 但是也许不是最好的解决方案
+configurations.all {
+    exclude module: 'slf4j-log4j12'
 }
 
 dependencies {
@@ -26,4 +46,14 @@ dependencies {
     compile group: 'us.codecraft', name: 'webmagic-extension', version: '0.6.1'
     // https://mvnrepository.com/artifact/com.huaban/jieba-analysis
     compile group: 'com.huaban', name: 'jieba-analysis', version: '1.0.2'
+    // spring boot
+    compile 'org.springframework.boot:spring-boot-starter-web'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}
+
+springBoot {
+    mainClass = 'Application.kt'
 }
