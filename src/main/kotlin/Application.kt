@@ -6,16 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 
+@SpringBootApplication
 @RestController
-class GreetingController {
+open class Application {
     @RequestMapping("/")
     fun greeting(): String{
-        return "一个不愿意透露姓名的网友上来就是操你妈逼"
+        return "啦啦啦啦\n撒打算"
     }
-}
 
-@SpringBootApplication
-open class Application {
     companion object {
         @JvmStatic fun main(args: Array<String>) {
             SpringApplication.run(Application::class.java, *args)
