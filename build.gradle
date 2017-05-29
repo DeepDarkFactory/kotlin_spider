@@ -39,8 +39,6 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     // https://mvnrepository.com/artifact/com.huaban/jieba-analysis
     compile group: 'com.huaban', name: 'jieba-analysis', version: '1.0.2'
-    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
-    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
     // spring boot
     compile 'org.springframework.boot:spring-boot-starter-web'
     // spring boot jpa

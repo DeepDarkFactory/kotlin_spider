@@ -1,39 +1,56 @@
-import org.apache.http.client.methods.HttpGet
-import org.apache.http.impl.client.HttpClientBuilder
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.lang.System.currentTimeMillis
+import java.net.HttpURLConnection
+import java.net.URL
 
 /**
  * Created by nbsaw on 2017/5/27.
  */
 
-
-
-class Request{
-    constructor(url:String){
-
-    }
-
-    fun get(url:String){
-
-    }
-
-    fun post(url:String){
-
-    }
-}
+//class Request{
+//
+//    init {
+//
+//    }
+//
+//    constructor(url:String){
+//
+//    }
+//
+//    fun get():Request{
+//
+//    }
+//
+//    fun get(url:String){
+//
+//    }
+//
+//    fun post():Request{
+//
+//    }
+//
+//    fun post(url:String){
+//
+//    }
+//
+//    fun text(){
+//
+//    }
+//}
 
 fun main(args: Array<String>) {
-    var client =  HttpClientBuilder.create().build()
-    var targetHost = HttpGet("http://localhost:3000")
-    var response = client.execute(targetHost)
-    var rd =  BufferedReader(InputStreamReader(response.entity.content))
-    var result = StringBuffer()
-    var line = ""
-    while (rd.ready()){
-        if (line == null) break
-        line = rd.readLine()
-        result.append(line)
+    var star = currentTimeMillis()
+    var baidu = URL("http://www.bilibili.com")
+    var con = baidu.openConnection() as HttpURLConnection
+    con.requestMethod = "GET"
+    con.useCaches = false
+    var input = BufferedReader(InputStreamReader(con.inputStream))
+    while (true){
+        var line: String? = input.readLine() ?: break
+        println(line)
     }
-    println(result)
+    input.close()
+    con.disconnect()
+    println("耗时 ${(currentTimeMillis() - star)} ms")
 }
