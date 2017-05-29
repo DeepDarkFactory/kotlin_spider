@@ -1,4 +1,4 @@
-//package music163
+//package com.nbsaw.kotlin_spider.music163
 //
 //import com.huaban.analysis.jieba.JiebaSegmenter
 //import us.codecraft.webmagic.Page
@@ -78,7 +78,7 @@
 //
 //
 //
-//fun main(args:Array<String>){
+//fun kotlin_spider.main(args:Array<String>){
 //    var startTime :Long = currentTimeMillis()
 //    var endTime :Long
 //    System.out.println("开始爬取...")
