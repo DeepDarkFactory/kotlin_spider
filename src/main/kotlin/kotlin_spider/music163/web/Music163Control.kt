@@ -2,9 +2,7 @@ package kotlin_spider.music163.web
 
 import kotlin_spider.music163.domain.Music163Entity
 import kotlin_spider.music163.domain.Music163Repository
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.websocket.server.PathParam
 
 /**
@@ -15,7 +13,15 @@ import javax.websocket.server.PathParam
 @RequestMapping(value = "/163")
 class Music163Control(val repository:Music163Repository) {
     @GetMapping
-    fun get(@PathParam("id") id:Long): List<Music163Entity> {
-        return repository.findBySinger(id)
+    fun get(): String {
+        println("wwwwwww")
+//        repository.findBySinger(id)
+        return "wwww"
+    }
+
+    @GetMapping("/post")
+    fun post():String{
+        println("asd")
+        return "asd"
     }
 }

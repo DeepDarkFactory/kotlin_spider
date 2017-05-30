@@ -1,91 +1,79 @@
-//package com.nbsaw.kotlin_spider.music163
-//
-//import com.huaban.analysis.jieba.JiebaSegmenter
-//import us.codecraft.webmagic.Page
-//import us.codecraft.webmagic.Request
-//import us.codecraft.webmagic.Site
-//import us.codecraft.webmagic.Spider
-//import us.codecraft.webmagic.processor.PageProcessor
-//import java.lang.System.currentTimeMillis
-//import java.util.*
-//
-//
-///**
-// * Created by nbsaw on 2017/5/23.
-// */
-//var count = 0
-//var musicList = LinkedList<String>()
-//var word = HashMap<String,Int>()
-//var wordList = LinkedList<List<String>>()
-//
-//class songsIdSpider : PageProcessor {
-//    private var site = Site.me().setRetryTimes(3).setSleepTime(100)
-//    override fun process(page: Page) {
-//        //获取页面需要的内容
-//        var items = page.html.xpath("//*[@id=\"artist-top50\"]//ul[@class=\"f-hide\"]//li//a").nodes()
-//        for (item in items){
-//            musicList.add(item.links().regex("\\d+$").toString())
-//            count ++
-//        }
-//    }
-//    override fun getSite(): Site {
-//        return site
-//    }
-//}
-//
-//
-//class lyricSpider : PageProcessor {
-//    private var site = Site.me().setRetryTimes(3).setSleepTime(100)
-//    override fun process(page: Page) {
-//        //获取页面需要的内容
-//        var text = page.json.jsonPath("lrc.lyric").replace("\\[.+\\]","").replace("\\pP|\\pS", "").replace("作曲家","").replace("作曲","").replace("作词","")
-//        var sg = JiebaSegmenter()
-//        wordList.add(sg.sentenceProcess(text.toString()))
-//    }
-//
-//
-//    override fun getSite(): Site {
-//        return site
-//    }
-//
-//}
-//
-//fun getLyric(){
-//    musicList.forEach{
-//        Spider.create(lyricSpider()).addUrl("http://music.163.com/api/song/lyric?os=osx&id=$it&lv=-1&kv=-1&tv=-1").thread(5).run()
-//    }
-//}
-//
-//fun getRank(){
-//    wordList.forEach {
-//        it.forEach {w ->
-//            var key = w.trim().replace("\n","")
-//            if (word[key] != null){
-//                word[key] = word[key]!! + 1
-//            }
-//            else if (!key.trim().isEmpty() && key.length > 1)
-//                word[key] = 1
-//        }
-//    }
-//    // 如果你行看看输出的结果
-//
-//    // 正序输出结果
-////    word.entries.stream().sorted(Map.Entry.comparingByValue()).forEach(::println)
-//    // 逆序输出结果
-////    word.entries.stream().sorted(Map.Entry.comparingByValue{o1,o2 -> o2.compareTo(o1)}).forEach(::println)
-//}
-//
-//
-//
-//
-//fun kotlin_spider.main(args:Array<String>){
-//    var startTime :Long = currentTimeMillis()
-//    var endTime :Long
-//    System.out.println("开始爬取...")
-//    val request = Request("http://music.163.com/artist?id=1049179")
-//    Spider.create(songsIdSpider()).addRequest(request).thread(5).run()
-//    endTime = currentTimeMillis()
-//    getLyric()
-//    getRank()
-//    System.out.println("爬取结束，耗时约" + ((endTime - startTime) / 1000) + "秒，抓取了"  + count + "条歌曲")
-//}
+package com.nbsaw.kotlin_spider.music163
+
+import com.huaban.analysis.jieba.JiebaSegmenter
+import kotlin_spider.libs.KRequest
+import java.lang.System.currentTimeMillis
+import java.util.*
+
+
+/**
+ * Created by nbsaw on 2017/5/23.
+ */
+class Music163Spider{
+    var count = 0
+    var musicList = LinkedList<String>()
+    var word = HashMap<String,Int>()
+    var wordList = LinkedList<List<String>>()
+
+    private fun getMusicList(singerId:String){
+        val request = KRequest("http://music.163.com/artist?id=$singerId")
+        var li = request.dom().getElementById("artist-top50").getElementsByTag("li")
+        li.stream().forEach {
+            var a = it.getElementsByTag("a")[0]
+            var href = a.attr("href").replace("/song?id=","")
+            musicList.add(href)
+            count++
+        }
+    }
+
+    private fun getLyric(){
+        musicList.forEach{
+            var text = KRequest("http://music.163.com/api/song/lyric?os=osx&id=$it&lv=-1&kv=-1&tv=-1").jsonArray()
+            var json = text[0].asJsonObject.get("lrc").asJsonObject.get("lyric").toString()
+                    .replace(Regex("\\\\n"),"")
+                    .replace(Regex("\\[.+?\\]"),"")
+                    .replace(Regex("\\pP|\\pS"), "")
+                    .replace("作曲家","")
+                    .replace("作曲","")
+                    .replace("作词","")
+                    .replace(" ","")
+            var sg = JiebaSegmenter()
+            wordList.add(sg.sentenceProcess(json))
+        }
+    }
+    private fun getRank(){
+        wordList.forEach {
+            it.forEach {w ->
+                var key = w.trim().replace("\n","")
+                if (word[key] != null){
+                    word[key] = word[key]!! + 1
+                }
+                else if (!key.trim().isEmpty() && key.length > 1)
+                    word[key] = 1
+            }
+        }
+        // 正序输出结果
+        //    word.entries.stream().sorted { o1, o2 ->  o2.value.compareTo(o1.value)}.forEach(::println)
+        // 逆序输出结果
+        word.entries.stream().sorted { o1, o2 ->  o1.value.compareTo(o2.value)}.forEach(::println)
+    }
+
+    private fun findSingerId(singName: String){
+
+    }
+
+    constructor(singName:String){
+        var startTime :Long = currentTimeMillis()
+        System.out.println("开始爬取...")
+        // TODO 数据库缓存支持
+//        getMusicList()
+        getLyric()
+        getRank()
+        println("爬取结束，耗时约${(currentTimeMillis() - startTime)}毫秒，抓取了${count}条歌曲")
+    }
+}
+
+fun main(args:Array<String>){
+//    KRequest.post("http://music.163.com/api/search/pc/").formData()
+    println(KRequest("http://localhost:3000/163/123"))
+}
