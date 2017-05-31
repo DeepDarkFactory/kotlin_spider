@@ -56,5 +56,5 @@ task wrapper(type: Wrapper) {
 }
 
 springBoot {
-    mainClass = 'kotlin_spider.Application'
+    mainClass = 'kotlin_spider.ApplicationKt'
 }
