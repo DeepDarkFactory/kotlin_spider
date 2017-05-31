@@ -9,6 +9,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
+import java.nio.charset.Charset
 
 /**
  * Created by nbsaw on 2017/5/27.
@@ -17,8 +18,6 @@ import java.net.URL
 class KRequest {
     private var client: URL
     private var connect: HttpURLConnection
-    private val LINE_FEED = "\r\n"
-    private var charset = "utf8"
 
     constructor(url: String) {
         client = URL(url)
@@ -50,14 +49,12 @@ class KRequest {
     }
 
     // 设置header
-    fun header() {
-
+    fun header(key :String,value:String):KRequest {
+        connect.setRequestProperty(key,value)
+        return this;
     }
 
-    // 设置form data
-    fun formData() {
 
-    }
 
     // 获取Dom
     fun dom(): Document {
@@ -72,16 +69,23 @@ class KRequest {
 
     // 获取Json对象
     fun json(): JsonObject {
-        connect.setRequestProperty("Content-Type", "application/json")
-        var rawJson = InputStreamReader(connect.inputStream).readLines().toString()
+        var rawJson = dom().body().text()
         return JsonParser().parse(rawJson).asJsonObject
     }
 
     // 获取Json数组
     fun jsonArray(): JsonArray {
-        connect.setRequestProperty("Content-Type", "application/json")
-        var rawJson = InputStreamReader(connect.inputStream).readLines().toString()
+        var rawJson = dom().body().text()
         return JsonParser().parse(rawJson).asJsonArray
+    }
+
+    // 设置form data
+    fun formData(data:Map<String,String>) :KRequest{
+        var Data = ""
+        data.forEach { t, u -> Data += "$t=$u&" }
+        connect.doOutput = true
+        connect.outputStream.write(Data.toByteArray(Charset.forName("UTF-8")))
+        return this
     }
 
     // 静态方法区
@@ -93,9 +97,12 @@ class KRequest {
         fun post(url: String): KRequest {
             return KRequest(url).post()
         }
+
+
     }
 
-//    override fun toString(): String {
-//        return dom().toString()
-//    }
+    override fun toString(): String {
+        return dom().toString()
+    }
+
 }

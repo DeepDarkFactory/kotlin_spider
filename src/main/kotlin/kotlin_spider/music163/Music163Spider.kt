@@ -4,6 +4,7 @@ import com.huaban.analysis.jieba.JiebaSegmenter
 import kotlin_spider.libs.KRequest
 import java.lang.System.currentTimeMillis
 import java.util.*
+import kotlin.collections.HashMap
 
 
 /**
@@ -14,10 +15,11 @@ class Music163Spider{
     var musicList = LinkedList<String>()
     var word = HashMap<String,Int>()
     var wordList = LinkedList<List<String>>()
+    var descList = LinkedList<Any>()
 
     private fun getMusicList(singerId:String){
-        val request = KRequest("http://music.163.com/artist?id=$singerId")
-        var li = request.dom().getElementById("artist-top50").getElementsByTag("li")
+        val result = KRequest.get("http://music.163.com/m/artist?id=$singerId")
+        var li = result.dom().getElementById("artist-top50").getElementsByTag("li")
         li.stream().forEach {
             var a = it.getElementsByTag("a")[0]
             var href = a.attr("href").replace("/song?id=","")
@@ -28,8 +30,8 @@ class Music163Spider{
 
     private fun getLyric(){
         musicList.forEach{
-            var text = KRequest("http://music.163.com/api/song/lyric?os=osx&id=$it&lv=-1&kv=-1&tv=-1").jsonArray()
-            var json = text[0].asJsonObject.get("lrc").asJsonObject.get("lyric").toString()
+            var text = KRequest("http://music.163.com/api/song/lyric?os=osx&id=$it&lv=-1&kv=-1&tv=-1").json()
+            var json = text.asJsonObject.get("lrc").asJsonObject.get("lyric").toString()
                     .replace(Regex("\\\\n"),"")
                     .replace(Regex("\\[.+?\\]"),"")
                     .replace(Regex("\\pP|\\pS"), "")
@@ -53,27 +55,20 @@ class Music163Spider{
             }
         }
         // 正序输出结果
-        //    word.entries.stream().sorted { o1, o2 ->  o2.value.compareTo(o1.value)}.forEach(::println)
+            word.entries.stream().sorted { o1, o2 ->  o2.value.compareTo(o1.value)}.forEach{descList.add(mapOf("key" to it.key,"value" to it.value))}
         // 逆序输出结果
-        word.entries.stream().sorted { o1, o2 ->  o1.value.compareTo(o2.value)}.forEach(::println)
+//        word.entries.stream().sorted { o1, o2 ->  o1.value.compareTo(o2.value)}.forEach{s -> orderList.add(s)}
     }
 
-    private fun findSingerId(singName: String){
 
-    }
 
     constructor(singName:String){
         var startTime :Long = currentTimeMillis()
         System.out.println("开始爬取...")
         // TODO 数据库缓存支持
-//        getMusicList()
+        getMusicList(KRequest.post("http://music.163.com/api/search/pc/").formData(mapOf("s" to singName,"type" to "100")).json().get("result").asJsonObject.get("artists").asJsonArray[0].asJsonObject.get("id").toString())
         getLyric()
         getRank()
         println("爬取结束，耗时约${(currentTimeMillis() - startTime)}毫秒，抓取了${count}条歌曲")
     }
-}
-
-fun main(args:Array<String>){
-//    KRequest.post("http://music.163.com/api/search/pc/").formData()
-    println(KRequest("http://localhost:3000/163/123"))
 }
