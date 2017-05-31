@@ -18,8 +18,8 @@ class Music163Spider{
     var descList = LinkedList<Any>()
 
     private fun getMusicList(singerId:String){
-        val result = KRequest.get("http://music.163.com/m/artist?id=$singerId")
-        var li = result.dom().getElementById("artist-top50").getElementsByTag("li")
+        val result = KRequest.get("http://music.163.com/artist?id=$singerId")
+        var li = result.dom().getElementsByClass("f-hide")[0].getElementsByTag("li")
         li.stream().forEach {
             var a = it.getElementsByTag("a")[0]
             var href = a.attr("href").replace("/song?id=","")
@@ -31,16 +31,20 @@ class Music163Spider{
     private fun getLyric(){
         musicList.forEach{
             var text = KRequest("http://music.163.com/api/song/lyric?os=osx&id=$it&lv=-1&kv=-1&tv=-1").json()
-            var json = text.asJsonObject.get("lrc").asJsonObject.get("lyric").toString()
-                    .replace(Regex("\\\\n"),"")
-                    .replace(Regex("\\[.+?\\]"),"")
-                    .replace(Regex("\\pP|\\pS"), "")
-                    .replace("作曲家","")
-                    .replace("作曲","")
-                    .replace("作词","")
-                    .replace(" ","")
-            var sg = JiebaSegmenter()
-            wordList.add(sg.sentenceProcess(json))
+            var json = text.asJsonObject.get("lrc")
+            if(json != null) {
+                json = text.asJsonObject.get("lrc").asJsonObject.get("lyric")
+                var result = json.toString()
+                        .replace(Regex("\\\\n"),"")
+                        .replace(Regex("\\[.+?\\]"),"")
+                        .replace(Regex("\\pP|\\pS"), "")
+                        .replace("作曲家","")
+                        .replace("作曲","")
+                        .replace("作词","")
+//                    .replace(" ","")
+                var sg = JiebaSegmenter()
+                wordList.add(sg.sentenceProcess(result))
+            }
         }
     }
     private fun getRank(){
