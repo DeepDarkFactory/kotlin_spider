@@ -2,7 +2,9 @@
 debug: true
 
 # 项目的名字
-project.name:  "kotlin_spider"
+project:
+      name :  kotlin_spider
+      version : 0.0.2
 
 # 服务器的一些配置
 server:

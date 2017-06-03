@@ -6,5 +6,5 @@ import com.nbsaw.kotlin_spider.music163.Music163Spider
 
 
 fun main(args: Array<String>) {
-    println(Music163Spider("96猫").descList)
+    println(Music163Spider("刀郎").descList)
 }
