@@ -1,10 +1,10 @@
-# debug 开关
+# debug 信息
 debug: true
 
 # 项目的名字
 project:
       name :  kotlin_spider
-      version : 0.0.2
+      version : 0.0.3
 
 # 服务器的一些配置
 server:

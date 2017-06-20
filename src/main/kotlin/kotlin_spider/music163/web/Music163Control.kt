@@ -13,7 +13,7 @@ import javax.websocket.server.PathParam
 
 @RestController
 @RequestMapping(value = "/163")
-class Music163Control(val repository:Music163Repository) {
+class Music163Controller(val repository:Music163Repository) {
     @GetMapping
     fun get(name:String): LinkedList<Any> {
         println(name)

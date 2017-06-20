@@ -41,7 +41,6 @@ class Music163Spider{
                         .replace("作曲家","")
                         .replace("作曲","")
                         .replace("作词","")
-//                    .replace(" ","")
                 var sg = JiebaSegmenter()
                 wordList.add(sg.sentenceProcess(result))
             }

@@ -4,4 +4,4 @@
 /__/</<//_)_  /__/(_/|/ (/ <_  (_/  (_/|(_<_(_) (/ (_/_
        /                                            /
       '                                            '
-${AnsiColor.BRIGHT_GREEN}::${project.name}::  ${AnsiColor.DEFAULT}( $project.version ) Made by ${AnsiColor.BRIGHT_BLUE}Nbsaw
+${AnsiColor.BRIGHT_GREEN}::${project.name}::  ${AnsiColor.DEFAULT}( ${project.version} ) Made by ${AnsiColor.BRIGHT_BLUE} Nbsaw
