@@ -30,8 +30,9 @@
 3. 这门语言是一门不错的语言,有些地方可以写的很短
 4. 因为我是java开发者,完全兼容java,所以我用着还行
 
-## 关于DDF
-我们是Deep Dark Factory(念起来很羞耻)一个有意思的小团队,目前写后端代码的人是我,写前端的是我的小伙伴[@Hazlank](https://github.com/Hazlank),如果你有更好的建议或者想法欢迎你提交到issuse里面一起讨论,或者加入我们的团队。我们随时欢迎新成员,不管你是写Kotlin,Java,Node或是其他的都不重要,重要的是你能来。
-
 ## License
 [The MIT License (MIT)](https://github.com/Nbsaw/kotlin_spider/blob/master/LICENSE)
+
+## 日志
+
+现在是2017年10月21日13:59:42,完全忘记了这个东西....
